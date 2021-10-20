@@ -1,7 +1,6 @@
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 import pandas as pd
-
 songs = pd.read_csv('songs.csv')
 
 
@@ -15,13 +14,18 @@ def find_song_database(name, artist, songs):
 
 def find_similar(name, artist, songs):
     database = songs[songs.popularity > 0.5].reset_index(drop=True)
-    indx_names = database[['track_name', 'artist_name', 'tempo', 'Cluster']]
-    songs_train = database.drop(
-        ['track_name', 'artist_name', 'tempo', 'Cluster'], axis=1)
+    indx_names = database[['track_name', 'artist_name', 'tempo', 'popularity',
+                           'energy', 'danceability', 'valence', 'liveness',
+                           'loudness', 'speechiness', 'Cluster']]
+    songs_train = database.drop(['track_name', 'artist_name', 'tempo',
+                                 'popularity', 'energy', 'danceability',
+                                 'valence', 'liveness', 'loudness',
+                                 'speechiness', 'Cluster'], axis=1)
 
     song = find_song_database(str(name), str(artist), database)
 
     if type(song) != type(None):
+
         indx_song = song.index
 
         cos_dists = cosine_similarity(songs_train, songs_train)
