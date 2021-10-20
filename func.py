@@ -15,9 +15,9 @@ def find_song_database(name, artist, songs):
 
 def find_similar(name, artist, songs):
     database = songs[songs.popularity > 0.5].reset_index(drop=True)
-    indx_names = database[['track_name', 'artist_name', 'Cluster']]
+    indx_names = database[['track_name', 'artist_name', 'tempo', 'Cluster']]
     songs_train = database.drop(
-        ['track_name', 'artist_name', 'Cluster'], axis=1)
+        ['track_name', 'artist_name', 'tempo', 'Cluster'], axis=1)
 
     song = find_song_database(str(name), str(artist), database)
 
@@ -49,6 +49,7 @@ def playlist_song(name, artist, songs):
 
             print(str(track_name) + ' - ' + str(artist_name))
             recommended_music.append(
-                str(track_name) + ' - ' + str(artist_name))
+                str(track_name) + ' - ' + str(artist_name) + '   ')
+        return(str(recommended_music))
 
     return None
