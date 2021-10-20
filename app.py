@@ -12,15 +12,18 @@ df = pd.read_csv('songs.csv')
 st.title('Music Recommend System')
 musics_dict = pickle.load(open('music_dict.pkl', 'rb'))
 musics = pd.DataFrame(musics_dict)
-selected_music = st.selectbox(
-    "Type or select a music from the dropdown",
-    musics['track_name'].values
-)
+
 selected_artist = st.selectbox(
     "Type or select a music from the dropdown",
-    musics['artist_name'].values
+    musics['artist_name'].values,
+    index=8000
 )
 
+selected_music = st.selectbox(
+    "Type or select a music from the dropdown",
+    musics[musics['artist_name']==selected_artist]['track_name'].values,
+    index=8000
+)
 
 if st.button('Recommend'):
     st.write(func.playlist_song(selected_music, selected_artist, df))
