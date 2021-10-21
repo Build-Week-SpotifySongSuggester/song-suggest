@@ -16,13 +16,13 @@ musics = pd.DataFrame(musics_dict)
 selected_artist = st.selectbox(
     "Type or select an artist from the dropdown",
     musics['artist_name'].values,
-    index=8000
+    index=1
 )
 
 selected_music = st.selectbox(
     "Type or select a song from the dropdown",
     musics[musics['artist_name']==selected_artist]['track_name'].values,
-    index=8000
+    index=1
 )
 
 if st.button('Recommend'):
