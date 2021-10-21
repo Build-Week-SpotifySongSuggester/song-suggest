@@ -16,8 +16,7 @@ selected_artist = st.selectbox(
 	    musics['artist_name'].values,
 	)
 
-
-	selected_music = st.selectbox(
+selected_music = st.selectbox(
 	    "Type or select a song from the dropdown",
 	    musics[musics['artist_name']==selected_artist]['track_name'].values,
 	)
