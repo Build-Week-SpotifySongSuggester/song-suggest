@@ -12,14 +12,16 @@ st.title('Music Recommend System')
 musics_dict = pickle.load(open('music_dict.pkl', 'rb'))
 musics = pd.DataFrame(musics_dict)
 
-selected_music = st.selectbox(
-    "Type or select a music from the dropdown",
-    musics['track_name'].values
-)
+
 selected_artist = st.selectbox(
-    "Type or select a music from the dropdown",
-    musics['artist_name'].values
-)
+	    "Type or select an artist from the dropdown",
+	    musics['artist_name'].values,
+	)
+
+selected_music = st.selectbox(
+	    "Type or select a song from the dropdown",
+	    musics[musics['artist_name']==selected_artist]['track_name'].values,
+	)
     
 if st.button('Recommend'):
     df1 = func.find_similar(selected_music, selected_artist, df)
